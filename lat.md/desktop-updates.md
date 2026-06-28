@@ -18,4 +18,4 @@ Electron Builder installs `.deb` and `.rpm` payloads under `/opt/${productName}`
 
 The Ubuntu deb workflow gives maintainers a fast artifact-only build for Debian-family Linux testing.
 
-`.github/workflows/build-ubuntu-deb.yml` runs on manual dispatch and relevant pushes to `main`. It installs Node 22 dependencies, rebuilds native Electron modules for x64, runs the normal app build, packages only `--linux deb --x64`, and uploads `dist/*.deb` as the `ubuntu-deb-x64` artifact without publishing a release.
+`.github/workflows/build-ubuntu-deb.yml` runs on manual dispatch, relevant pushes to `main`, and published GitHub Releases. It installs Node 22 dependencies, rebuilds native Electron modules for x64, runs the normal app build, and packages only `--linux deb --x64`. Manual and push runs upload `dist/*.deb` as the `ubuntu-deb-x64` artifact; release-triggered runs also upload the `.deb` directly to the matching GitHub Release assets with `gh release upload`.
