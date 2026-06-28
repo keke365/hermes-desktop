@@ -1,5 +1,7 @@
 appId: com.nousresearch.hermes
-productName: Hermes One
+# Keep the package-level product name path-safe. Linux .deb/.rpm installs are
+# rooted at /opt/${productName}; spaces there break Ubuntu launchers.
+productName: HermesOne
 directories:
   buildResources: build
 files:
@@ -21,17 +23,20 @@ portable:
   artifactName: ${name}-${version}-portable.${ext}
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
+  shortcutName: Hermes One
+  uninstallDisplayName: Hermes One
   createDesktopShortcut: always
   oneClick: true
   perMachine: false
 mac:
+  executableName: Hermes One
   artifactName: ${name}-${version}-${arch}-${os}.${ext}
   icon: build/icon.icns
   entitlements: build/entitlements.mac.plist
   entitlementsInherit: build/entitlements.mac.inherit.plist
   extendInfo:
+    - CFBundleName: Hermes One
+    - CFBundleDisplayName: Hermes One
     - NSCameraUsageDescription: Application requests access to the device's camera.
     - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
     - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
@@ -42,6 +47,7 @@ mac:
 dmg:
   artifactName: ${name}-${version}-${arch}.${ext}
 linux:
+  executableName: hermes-desktop
   target:
     - AppImage
     - snap
@@ -55,6 +61,10 @@ linux:
     Hermes One is a native desktop app for installing, configuring, and chatting
     with Hermes Agent — a self-improving AI assistant with tool use, multi-platform
     messaging, and a closed learning loop.
+  desktop:
+    entry:
+      Name: Hermes One
+      StartupWMClass: HermesOne
 appImage:
   artifactName: ${name}-${version}.${ext}
 deb:
